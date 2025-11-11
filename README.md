@@ -1,2 +1,2 @@
-# Cl-nica-Odonto
+# Clinica-Odonto
 Projeto de Programação Web
