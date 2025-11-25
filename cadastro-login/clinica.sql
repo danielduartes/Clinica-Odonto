@@ -10,3 +10,13 @@ CREATE TABLE usuarios (
     senha VARCHAR(255) NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+CREATE TABLE secretaria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_completo VARCHAR(150) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    rg VARCHAR(20),
+    data_nascimento DATE,
+    sexo ENUM('M', 'F', 'Outro') NOT NULL,

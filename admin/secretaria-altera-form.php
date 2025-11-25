@@ -4,7 +4,7 @@
 
     $id = $_REQUEST['id'];
 
-    $sql = "SELECT * FROM categorias WHERE id=$id";
+    $sql = "SELECT * FROM secretaria WHERE id=$id";
     $resultado = mysqli_query($conexao, $sql);
 
     if(mysqli_num_rows($resultado) > 0){
@@ -16,8 +16,8 @@
 
 ?>
 
-<h2>Alteração de dados da categoria</h2>
-<form action="?pg=categorias-altera" method="post">
+<h2>Alteração de dados da secretaria</h2>
+<form action="?pg=secretaria-altera" method="post">
     <input type="hidden" name="id" value="<?=$id?>">
     <label>Bairro:</label>
     <input type="text" name="bairro" value="<?=$bairro?>" required><br>
@@ -28,6 +28,6 @@
 
 <?php
     } else {
-        echo "<br><h2>Nenhuma categoria encontrada</h2>";
+        echo "<br><h2>Nenhuma secretaria encontrada</h2>";
     }
 ?>

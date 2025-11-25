@@ -1,6 +1,6 @@
 <div>
-    <h2>Cadastro de Categoria</h2>
-    <form action="?pg=categorias-cadastro" method="post">
+    <h2>Cadastro de Secretaria</h2>
+    <form action="?pg=secretaria-cadastro" method="post">
         
         <label>Bairro:</label>
         <select name="bairro" required>

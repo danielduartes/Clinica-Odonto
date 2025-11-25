@@ -10,17 +10,17 @@
         exit;
     }
 
-    $sql = "INSERT INTO categorias (bairro, tamanho)
+    $sql = "INSERT INTO secretaria (bairro, tamanho)
             VALUES ('$bairro', '$tamanho')";
 
     $inserir = mysqli_query($conexao, $sql);
 
     if($inserir) {
-        echo "<h2>Categoria cadastrada com sucesso!</h2>";
-        echo "<a href='?pg=categorias-admin'>Voltar</a>";
+        echo "<h2>Secretaria cadastrada com sucesso!</h2>";
+        echo "<a href='?pg=secretaria-admin'>Voltar</a>";
     } else {
-        echo "<h3>Erro ao cadastrar categoria.</h3>";
-        echo "<a href='?pg=categorias-admin'>Voltar</a>";
+        echo "<h3>Erro ao cadastrar secretaria.</h3>";
+        echo "<a href='?pg=secretaria-admin'>Voltar</a>";
     }
 
 ?>
