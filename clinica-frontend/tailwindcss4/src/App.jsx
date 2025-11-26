@@ -1,8 +1,9 @@
 import './App.css'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './Pages/home'
-import Contato from './Pages/contato'
-import SobreNos from './Pages/sobrenos'
+import Home from './Pages/consumidor/home'
+import Contato from './Pages/consumidor/contato'
+import SobreNos from './Pages/consumidor/sobrenos'
+
 
 function App() {
 
