@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function Contato() {
   return (
     <>
+     {/* Header */}
       <div className='bg-white min-h-screen'>
         <div className='fixed top-0 left-0 w-full z-50 bg-cyan-900'>
           <div className='bg-cyan-800 px-10 py-3 border-b-2 border-gray-400'>
@@ -21,6 +22,8 @@ function Contato() {
             </div>
           </div>
         </div>
+
+        {/* Página */}
         <div className='flex justify-between'>
           <div className='pt-60 pl-10 flex flex-col'>
             <div>
@@ -72,6 +75,8 @@ function Contato() {
           </form>
         </div>
       </div>
+
+      {/* Rodapé */}
       <div className='grid grid-cols-3 divide-x divide-gray-400 my-7 font-light'>
         <div className='pl-30'>
           <p className='mb-3'>Dra. Juliana Medeiros</p>
