@@ -7,6 +7,7 @@ import Funcionarios from './Pages/admin/funcionarios'
 import Pacientes from './Pages/admin/pacientes'
 import Consultas from './Pages/admin/consultas'
 import MarcarConsulta from './Pages/admin/marcar-consulta'
+import CadastrarPaciente from './Pages/admin/cadastrar-paciente'
 import Admin from './Pages/admin/admin'
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/consultas" element={<Consultas/>}/>
         <Route path="/marcarconsulta" element={<MarcarConsulta/>}/>
         <Route path="/admin" element={<Admin/>}/>
+        <Route path="/cadastrarpaciente" element={<CadastrarPaciente/>}/>
       </Routes>
     </Router>
   )

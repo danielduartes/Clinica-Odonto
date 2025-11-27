@@ -24,13 +24,13 @@ try {
 
 
 try {
-    $sql = "SELECT id, paciente, cpf, data, hora, funcionario FROM consultas ORDER BY data DESC, hora DESC"; 
+    $sql = "SELECT id, nome, cpf, telefone, email, funcionario, criado_em FROM pacientes ORDER BY id DESC"; 
     
     $stmt = $pdo->query($sql);
     
-    $consultas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $pacientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($consultas);
+    echo json_encode($pacientes);
 
 } catch (\PDOException $e) {
     http_response_code(500);

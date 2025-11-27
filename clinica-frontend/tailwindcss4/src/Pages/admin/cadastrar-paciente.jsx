@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-function MarcarConsulta() {
+function CadastrarPaciente() {
   const [formData, setFormData] = useState({
-    paciente: '',
+    nome: '',
     cpf: '',
-    data: '',
-    hora: '',
-    funcionario: 'Não'
+    telefone: '',
+    email: ''
   });
 
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ function MarcarConsulta() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost/Clinica-Odonto/admin/consultas-marcar.php', {
+      const response = await fetch('http://localhost/Clinica-Odonto/admin/pacientes-cadastrar.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,8 +39,8 @@ function MarcarConsulta() {
       }
 
       if (response.ok) {
-        alert('Consulta agendada com sucesso!');
-        navigate('/consultas');
+        alert('Paciente cadastrado com sucesso!');
+        navigate('/pacientes');
       } else {
         alert(`Erro ao agendar: ${resultado.erro || 'Erro desconhecido'}`);
         console.error(resultado);
@@ -76,19 +75,19 @@ function MarcarConsulta() {
         <div className='bg-sky-700 w-130 h-140 ml-130 mt-30 rounded-xl shadow-2xl'>
           <form onSubmit={handleSubmit}>
             <div className='text-start pt-7 pl-7 font-semibold'>
-              <p className='text-white'>Preencha o formulário para marcar a consulta do paciente</p>
+              <p className='text-white'>Preencha o formulário para cadastrar o paciente</p>
             </div>
             <div className='text-start'>
-              <input required type="text" name="paciente" id="paciente" placeholder='Nome' value={formData.paciente} onChange={handleChange} className='bg-white mt-10 ml-15 w-70 h-9 rounded-lg px-3'/>
+              <input required type="text" name="nome" id="nome" placeholder='Nome' value={formData.nome} onChange={handleChange} className='bg-white mt-10 ml-15 w-70 h-9 rounded-lg px-3'/>
             </div>
             <div className='text-start'>
               <input required type="text" name="cpf" id="cpf" placeholder='CPF' value={formData.cpf} onChange={handleChange} className='bg-white mt-5 ml-15 w-70 h-9 rounded-lg px-3'/>
             </div>
             <div className='text-start'>
-              <input required type="date" name="data" id="data" value={formData.data} onChange={handleChange} className='bg-white mt-5 ml-15 w-40 h-9 rounded-lg px-3'/>
+              <input required type="tel" name="telefone" id="telefone" placeholder='(xx) xxxxx-xxxx' value={formData.telefone} onChange={handleChange} className='bg-white mt-5 ml-15 w-40 h-9 rounded-lg px-3'/>
             </div>
             <div className='text-start'>
-              <input required type="time" name="hora" id="hora" value={formData.hora} onChange={handleChange} className='bg-white mt-5 ml-15 w-40 h-9 rounded-lg px-3'/>
+              <input required type="email" name="email" id="email" placeholder='you@example.com' value={formData.email} onChange={handleChange} className='bg-white mt-5 ml-15 w-70 h-9 rounded-lg px-3'/>
             </div>
             <div className='text-start mt-7'>
               <p className='ml-15 text-white font-semibold'>Selecione se o paciente é um funcionário ou não</p>
@@ -98,7 +97,7 @@ function MarcarConsulta() {
               </select>
             </div>
             <div className='text-start ml-15 mt-5'>
-              <button type='submit' className='mt-7 mr-65 text-white bg-cyan-400 hover:bg-sky-600 p-2 px-3 rounded-lg font-semibold'>Agendar</button>
+              <button type='submit' className='mt-7 mr-65 text-white bg-cyan-400 hover:bg-sky-600 p-2 px-3 rounded-lg font-semibold'>Cadastrar</button>
             </div>
           </form>
         </div>
@@ -107,4 +106,4 @@ function MarcarConsulta() {
   );
 }
 
-export default MarcarConsulta;
+export default CadastrarPaciente;
