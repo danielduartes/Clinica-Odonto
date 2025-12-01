@@ -1,23 +1,36 @@
 <?php
 
-    require_once "config.inc.php";
+require_once "config.inc.php";
 
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $cliente = $_POST["cliente"];
-        $cidade = $_POST["cidade"];
-        $estado = $_POST["estado"];
-    }else{
-        echo "<H2>Envio de dados não permitido</H2>";
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $sql = "INSERT INTO clientes (cliente, cidade, estado)
-        VALUES ('$cliente', '$cidade', '$estado')";
+    $nome_completo = $_POST["nome_completo"];
+    $cpf           = $_POST["cpf"];
+    $email         = $_POST["email"];
+    $telefone      = $_POST["telefone"];
+    $endereco      = $_POST["endereco"];
+    $cidade        = $_POST["cidade"];
+    $estado        = $_POST["estado"];
+    $sexo          = $_POST["sexo"];
 
-    $inserir = mysqli_query($conexao, $sql);
+} else {
+    echo "<h2>Envio de dados não permitido</h2>";
+    exit;
+}
 
-    if($inserir) {
-        echo "<H2>Cadastrado com sucesso</H2>";
-        echo "<a href='?pg=clientes-admin'>Voltar</a>";
-    }else{
-        echo "Cadastrado não realizado.";
-    }
+$sql = "INSERT INTO clientes (
+            nome_completo, cpf, email, telefone, endereco, cidade, estado, sexo
+        ) VALUES (
+            '$nome_completo', '$cpf', '$email', '$telefone', 
+            '$endereco', '$cidade', '$estado', '$sexo'
+        )";
+
+$inserir = mysqli_query($conexao, $sql);
+
+if ($inserir) {
+    echo "<h2>Cadastrado com sucesso</h2>";
+    echo "<a href='?pg=clientes-admin'>Voltar</a>";
+} else {
+    echo "<h2>Cadastro não realizado</h2>";
+    echo mysqli_error($conexao);
+}
