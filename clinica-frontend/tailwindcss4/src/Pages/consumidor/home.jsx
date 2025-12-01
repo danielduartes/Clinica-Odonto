@@ -35,22 +35,22 @@ function Home() {
               <img src="src/assets/imagens/clinica.jpg" alt="clinica"  className='w-130 h-75 rounded-xl shadow-xl mt-10 ml-20 mb-10'/> 
             </div>
           </div>
-          <div className='bg-sky-300 p-8 pt-4 flex flex-col rounded-2xl shadow-xl mt-16 w-4/12 h-fit'>
+          <div className='bg-cyan-600 p-8 pt-4 flex flex-col rounded-2xl shadow-xl mt-16 w-4/12 h-fit'>
             <div className='flex flex-col space-y-1'>
               <div className='pt-3 pb-7'>
                 <h2 className='text-white flex items-start font-semibold text-xl'>Venha nos visitar!</h2>
               </div>
             <div className='flex items-start gap-4'>
               <img src="src/assets/imagens/telefone.png" alt="telefone" className='w-4 h-4 mr-2 mt-1'/>
-              <p className='text-black font-thin'>(83) 99129-2872</p>
+              <p className='text-white font-thin'>(83) 99129-2872</p>
             </div>
               <div className='flex items-start gap-4'>
                 <img src="src/assets/imagens/carta.png" alt="carta" className='w-7 h-7'/>
-                <p className='text-black font-thin'>sorrisoraiz@gmail.com</p>
+                <p className='text-white font-thin'>sorrisoraiz@gmail.com</p>
               </div>
               <div className='flex items-start gap-4'>
                 <img src="src/assets/imagens/localizacao.png" alt="localizacao" className='w-6 h-6'/>
-                <p className='text-black font-thin'>R. Antônio Rabelo Júnior, 170 - 4º andar -<br/> Sala 401 - Miramar, João Pessoa - PB</p>
+                <p className='text-white font-thin'>R. Antônio Rabelo Júnior, 170 - 4º andar -<br/> Sala 401 - Miramar, João Pessoa - PB</p>
               </div>
               <div>
                 <button className='mt-7 text-white bg-cyan-800 hover:bg-sky-500 p-2 px-3 rounded-lg font-semibold'>Agende sua consulta</button>

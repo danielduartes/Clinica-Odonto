@@ -47,7 +47,7 @@ function Contato() {
             <div className='mt-40 mr-70 '>
               <div className='bg-cyan-500 w-100 h-120 rounded-xl'>
                 <div className='flex items-start'>
-                  <p className='text-white text-lg mt-8 ml-10 font-semibold'>Mande-nos uma mensagem</p>
+                  <p className='text-white text-lg mt-8 ml-10 font-semibold'>Mande uma mensagem</p>
                 </div>
                 <div className='mt-5 mr-3'>
                   <input required type="text" name="nome" id="nome" className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='Nome Completo'/>
