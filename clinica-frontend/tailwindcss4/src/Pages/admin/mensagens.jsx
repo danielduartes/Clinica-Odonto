@@ -104,6 +104,7 @@ function Mensagens() {
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">E-mail</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Assunto</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Mensagem</th>
+                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">

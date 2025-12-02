@@ -10,16 +10,15 @@ function AlterarConsulta() {
         id: id,
         data: '',
         hora: '',
-        paciente: '', // Nome do Paciente (String)
-        cpf: '',      // CPF do Paciente (String)
-        dentista: '', // Nome do Dentista (String)
+        paciente: '', 
+        cpf: '',      
+        dentista: '', 
         procedimento: '',
         funcionario: 'Não', 
     });
     const [carregando, setCarregando] = useState(true);
     const [erro, setErro] = useState(null);
-    // REMOVIDO: [pacientes, setPacientes] não é mais necessário
-    const [dentistas, setDentistas] = useState([]); // Lista de Dentistas (Ainda é alterável)
+    const [dentistas, setDentistas] = useState([]); 
 
     // URLs das APIs
     const API_BUSCA_ID = `http://localhost/Clinica-Odonto/admin/consultas-buscar-id.php?id=${id}`;

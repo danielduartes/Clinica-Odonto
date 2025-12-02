@@ -9,10 +9,9 @@ function MarcarConsulta() {
   cpf: '',
   data: '',
   hora: '',
-    // NOVOS CAMPOS OBRIGATÓRIOS DO FORMULÁRIO
-    dentista: 'Agamedes', // Valor padrão do select
-    procedimento: 'Avaliação Inicial', // Valor padrão do select
-  funcionario: 'Não' // Valor padrão do select
+  dentista: 'Agamedes', 
+  procedimento: 'Avaliação Inicial',
+  funcionario: 'Não' 
  });
 
  const navigate = useNavigate();
@@ -20,7 +19,6 @@ function MarcarConsulta() {
  const handleChange = (e) => {
   setFormData({
    ...formData,
-   // CORREÇÃO: O nome do campo no estado (state) deve corresponder ao atributo 'name' do input/select
    [e.target.name]: e.target.value,
   });
  };

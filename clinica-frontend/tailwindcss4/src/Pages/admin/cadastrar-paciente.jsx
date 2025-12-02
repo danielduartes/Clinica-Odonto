@@ -46,7 +46,7 @@ function CadastrarPaciente() {
         alert('Paciente cadastrado com sucesso!');
         navigate('/admin/pacientes');
       } else {
-        alert(`Erro ao agendar: ${resultado.erro || 'Erro desconhecido'}`);
+        alert(`Erro ao cadastrar paciente: ${resultado.erro || 'Erro desconhecido'}`);
         console.error(resultado);
       }
     } catch (error) {
