@@ -103,7 +103,7 @@ O front-end foi desenvolvido em **React**.
 |-------------|--------|
 | **Daniel Duarte** | FrontEnd, BackEnd e Banco de Dados |
 | **Agamedes Rodrigues** | FrontEnd, BackEnd, Banco de Dados e Documentação |
-| **Caio Vinicius** | FrontEnd e Banco de Dados |
+| **Caio Vinicius** | FrontEnd, Backend(pagina cadastro) e Banco de Dados |
 | **Ricksson Medeiros** | BackEnd e Banco de Dados |
 | **Daniel Flor** | BackEnd e Banco de Dados |
 
