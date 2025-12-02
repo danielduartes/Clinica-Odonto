@@ -64,6 +64,7 @@ Seção restrita, acessível apenas mediante autenticação de usuários autoriz
 3. Importe o arquivo **`clinica.sql`**, localizado no repositório:  
    `Clinica-Odonto/clinica.sql`
 4. O banco de dados será criado com todas as tabelas necessárias para o sistema.
+5. A pasta do repositório deve estar dentro da pasta "htdocs"
 
 ### 🎨 FrontEnd (Landing Page + Área Administrativa)
 O front-end foi desenvolvido em **React**.
@@ -74,14 +75,13 @@ O front-end foi desenvolvido em **React**.
 #### 📌 Passo a passo (terminal)
 1. Acesse o diretório do front-end:
    ```bash
-   cd "clinica-frontend"
+   cd "clinica-frontend/tailwindcss4"
 2. Instale as dependências e o tailwindcss/vite:
    ```bash
    npm install
    npm install tailwindcss @tailwindcss/vite
 3. Inicie o Projeto:
    ```bash
-   cd tailwindcss4
    npm run dev
    
  #### Caso tenha dúvidas assista esse material de apoio: https://www.youtube.com/watch?v=sHnG8tIYMB4
