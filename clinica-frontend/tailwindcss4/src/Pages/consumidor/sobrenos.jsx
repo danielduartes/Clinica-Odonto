@@ -94,10 +94,10 @@ function Sobrenos() {
         </div>
         <div className='flex ml-50 mt-7 mx-10'>
           <div className='flex justify-between'>
-            <Link><img src="src/assets/imagens/instagram.png" alt="instagram" className='w-8 h-8 mr-5 transition duration-300 hover:scale-120'/></Link>
+            <Link to={"https://www.instagram.com/draronisemedeiros/"} target='_blank'><img src="src/assets/imagens/instagram.png" alt="instagram" className='w-8 h-8 mr-5 transition duration-300 hover:scale-120'/></Link>
           </div>
           <div>
-            <Link><img src="src/assets/imagens/whatsapp.png" alt="whatsapp" className='w-8 h-8 mr-5 transition duration-300 hover:scale-120'/></Link>
+            <Link to={"https://api.whatsapp.com/send?text=https%3A%2F%2Fshare.google%2Fmt5vTDUvSNM68jJES"} target='_blank'><img src="src/assets/imagens/whatsapp.png" alt="whatsapp" className='w-8 h-8 mr-5 transition duration-300 hover:scale-120'/></Link>
           </div>
           <div>
             <Link><img src="src/assets/imagens/email.png" alt="email" className='w-8.5 h-8.5 transition duration-300 hover:scale-120'/></Link>

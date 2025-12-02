@@ -1,74 +1,69 @@
 <?php
-// 1. Configuração de Headers e Permissões (CORS)
+// consultas-marcar.php (CORRIGIDO PARA ESTRUTURA ANTIGA/TEXTO)
+
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Permite requisições de qualquer origem (seu React)
-header('Access-Control-Allow-Methods: POST, OPTIONS'); // Permite apenas POST e OPTIONS
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Methods: POST, OPTIONS'); 
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Trata requisições OPTIONS (pré-voo do CORS)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
+  http_response_code(200);
+  exit();
 }
 
-// Verifica se o método é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405); // Método Não Permitido
-    echo json_encode(["erro" => "Método não suportado. Use POST."]);
-    exit();
+  http_response_code(405); 
+  echo json_encode(["erro" => "Método não suportado. Use POST."]);
+  exit();
 }
 
-// 2. Receber e Decodificar o JSON do React
-// O React envia os dados no corpo da requisição como JSON
 $json_data = file_get_contents("php://input");
-$data = json_decode($json_data, true); // Converte JSON para um array associativo PHP
+$data = json_decode($json_data, true); 
 
-// 3. Validação de Dados Recebidos
-// Verifica se os campos obrigatórios estão presentes
-if (empty($data['paciente']) || empty($data['cpf']) || empty($data['data']) || empty($data['hora'])) {
-    http_response_code(400); // Requisição Inválida (Bad Request)
-    echo json_encode(["erro" => "Preencha todos os campos obrigatórios."]);
-    exit();
+// Validação dos campos que o React ESTÁ ENVIANDO
+if (empty($data['paciente']) || empty($data['cpf']) || empty($data['dentista']) || empty($data['procedimento']) || empty($data['data']) || empty($data['hora'])) {
+  http_response_code(400); 
+  echo json_encode(["erro" => "Preencha todos os campos obrigatórios."]);
+  exit();
 }
 
-// 4. Configurações do Banco de Dados (PDO)
+// Configurações do Banco de Dados
 $host = 'localhost';
-$db   = 'clinica'; // <--- **MUDE ESTE NOME!**
-$user = 'root';              
-$pass = '';                  
+$db  = 'clinica'; 
+$user = 'root';       
+$pass = '';         
 $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
 
-// 5. Conexão e Inserção no Banco de Dados
 try {
-     $pdo = new PDO($dsn, $user, $pass);
-     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $pdo = new PDO($dsn, $user, $pass);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-     // Prepara a query de inserção (Segurança contra SQL Injection)
-     $sql = "INSERT INTO consultas (paciente, cpf, data, hora, funcionario) 
-             VALUES (:paciente, :cpf, :data, :hora, :funcionario)";
-             
-     $stmt = $pdo->prepare($sql);
+  // CORREÇÃO: INSERT com as colunas de TEXTO/VARCHAR (paciente, cpf, dentista)
+  $sql = "INSERT INTO consultas (paciente, cpf, dentista, data, hora, funcionario, procedimento) 
+      VALUES (:paciente, :cpf, :dentista, :data, :hora, :funcionario, :procedimento)";
+      
+  $stmt = $pdo->prepare($sql);
 
-     // Executa a inserção, usando os dados decodificados do JSON
-     $stmt->execute([
-         'paciente' => $data['paciente'],
-         'cpf' => $data['cpf'],
-         'data' => $data['data'],
-         'hora' => $data['hora'],
-         // O campo 'funcionario' é um SELECT no React, seu valor padrão é 'Não'
-         'funcionario' => $data['funcionario'], 
-     ]);
+    // Determina o valor de 'funcionario' (o React está enviando)
+    $funcionario_val = $data['funcionario'] ?? 'Não';
 
-    // 6. Retorno de Sucesso (Resposta para o React)
-    http_response_code(201); // Código 201: Created
-    echo json_encode(["sucesso" => "Consulta agendada com sucesso!", "id" => $pdo->lastInsertId()]);
+  $stmt->execute([
+    'paciente' => $data['paciente'],
+    'cpf' => $data['cpf'],
+    'dentista' => $data['dentista'], // Coluna agora aceita string
+    'procedimento' => $data['procedimento'],
+    'data' => $data['data'],
+    'hora' => $data['hora'],
+    'funcionario' => $funcionario_val, 
+  ]);
+
+  http_response_code(201); 
+  echo json_encode(["sucesso" => "Consulta agendada com sucesso!", "id" => $pdo->lastInsertId()]);
 
 } catch (\PDOException $e) {
-    // 7. Retorno de Erro Interno do Servidor
-    http_response_code(500);
-    echo json_encode(["erro" => "Erro interno do servidor ao agendar a consulta.", "detalhes" => $e->getMessage()]);
+  http_response_code(500);
+  echo json_encode(["erro" => "Erro interno do servidor ao agendar a consulta.", "detalhes" => $e->getMessage()]);
 }
-
 ?>
