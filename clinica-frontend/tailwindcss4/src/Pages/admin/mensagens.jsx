@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function Pacientes() {
-  const [pacientes, setPacientes] = useState([]);
+function Mensagens() {
+  const [mensagens, setMensagens] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState(null);
 
-  const API_URL = 'http://localhost/Clinica-Odonto/admin/pacientes.php'; 
-  const API_EXCLUIR_URL = 'http://localhost/Clinica-Odonto/admin/pacientes-excluir.php'; // Adicionado URL de exclusão
+  const API_URL = 'http://localhost/Clinica-Odonto/admin/mensagens.php'; 
+  const API_EXCLUIR_URL = 'http://localhost/Clinica-Odonto/admin/mensagens-excluir.php'; // Adicionado URL de exclusão
 
   // Adicionada a função para deletar o paciente
   const handleExcluir = async (id, nome) => {
-      if (!window.confirm(`Tem certeza que deseja excluir o paciente ${nome} (ID: ${id})?`)) {
+      if (!window.confirm(`Tem certeza que deseja excluir esta mensagem de ${nome} (ID: ${id})?`)) {
           return;
       }
 
@@ -28,7 +28,7 @@ function Pacientes() {
           
           if (response.ok) {
               alert(resultado.sucesso);
-              setPacientes(pacientes.filter(p => p.id !== id));
+              setMensagens(mensagens.filter(p => p.id !== id));
           } else {
               alert(`Erro ao excluir: ${resultado.erro || 'Erro desconhecido'}`);
               console.error(resultado);
@@ -40,7 +40,7 @@ function Pacientes() {
   };
 
   useEffect(() => {
-    const buscarPacientes = async () => {
+    const buscarMensagens = async () => {
       try {
         const response = await fetch(API_URL);
         
@@ -49,7 +49,7 @@ function Pacientes() {
         }
         
         const dados = await response.json();
-        setPacientes(dados);
+        setMensagens(dados);
         
       } catch (error) {
         console.error("Houve um erro ao buscar os pacientes:", error);
@@ -59,7 +59,7 @@ function Pacientes() {
       }
     };
 
-    buscarPacientes();
+    buscarMensagens();
   }, []);
   if (carregando) {
     return <div className="p-20 text-center">Carregando pacientes...</div>;
@@ -91,9 +91,9 @@ function Pacientes() {
           </div>
         </div>
         <div className='pt-32 p-10'>
-          <h2 className="text-2xl font-bold mb-6 text-gray-800">📋 Lista de Pacientes</h2>
-          {pacientes.length === 0 ? (
-            <p className="text-gray-500">Nenhum paciente cadastrado.</p>
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">📋 Lista de Mensagens</h2>
+          {mensagens.length === 0 ? (
+            <p className="text-gray-500">Nenhuma mensagem foi enviada.</p>
           ) : (
             <div className="overflow-x-auto shadow-md rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
@@ -101,32 +101,23 @@ function Pacientes() {
                   <tr>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">ID</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Nome</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">CPF</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Idade</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">E-mail</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Telefone</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Endereço</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Sexo</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Funcionário?</th>
-                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Ações</th>
+                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Assunto</th>
+                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Mensagem</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {/* Mapeamento dos dados */}
-                  {pacientes.map((paciente) => (
-                    <tr key={paciente.id} className="hover:bg-gray-50">
-                      <td className="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">{paciente.id}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.nome}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.cpf}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.idade}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.email}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.telefone}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.endereco}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.sexo}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{paciente.funcionario}</td>
+                  {mensagens.map((mensagem) => (
+                    <tr key={mensagem.id} className="hover:bg-gray-50">
+                      <td className="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">{mensagem.id}</td>
+                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{mensagem.nome}</td>
+                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{mensagem.email}</td>
+                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{mensagem.assunto}</td>
+                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{mensagem.mensagem}</td>
                       <td className="py-4 px-6 whitespace-nowrap text-sm font-medium">
                         <button
-                          onClick={() => handleExcluir(paciente.id, paciente.nome)}
+                          onClick={() => handleExcluir(mensagem.id, mensagem.nome)}
                           className="text-red-600 hover:text-red-900 bg-red-100 hover:bg-red-200 p-2 rounded-lg font-semibold transition duration-150"
                         >
                           Excluir 🗑️
@@ -144,4 +135,4 @@ function Pacientes() {
 );
 }
 
-export default Pacientes;
+export default Mensagens;

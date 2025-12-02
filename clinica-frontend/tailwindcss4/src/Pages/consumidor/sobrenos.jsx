@@ -8,14 +8,14 @@ function Sobrenos() {
       <div className='bg-white min-h-screen'>
         <div className='fixed top-0 left-0 w-full z-50 bg-cyan-900'>
           <div className='bg-cyan-800 px-10 py-3 border-b-2 border-gray-400'>
-            <div className='flex justify-between m-3'>
-              <nav className='flex items-center ml-20 text-lg'>
+            <div className='flex justify-between my-3 ml-2'>
+              <nav className='flex items-center text-lg'>
                 <Link to='/' className='mx-10 font-semibold text-white hover:text-cyan-300'>Home</Link>
                 <Link to='/sobrenos' className='mx-10 font-semibold text-white hover:text-cyan-300'>Sobre Nós</Link>
                 <Link to='/contato' className='mx-10 font-semibold text-white hover:text-cyan-300'>Contato</Link>
               </nav>
               <div className='mr-10'>
-                <p className='text-white text-xl font-sans font-medium'>Sorriso Raiz</p>
+                <p className='text-white text-xl font-sans font-medium'>Clínica Odonto</p>
                 <p className='text-white text-xs font-serif'>Dra. Juliana Medeiros</p>
               </div>
             </div>

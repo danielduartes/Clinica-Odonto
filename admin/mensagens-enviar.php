@@ -25,7 +25,7 @@ $data = json_decode($json_data, true); // Converte JSON para um array associativ
 
 // 3. Validação de Dados Recebidos
 // Verifica se os campos obrigatórios estão presentes
-if (empty($data['nome']) || empty($data['cpf']) || empty($data['idade']) || empty($data['sexo']) || empty($data['endereco']) || empty($data['telefone']) || empty($data['email']) || empty($data['funcionario'])) {
+if (empty($data['nome']) || empty($data['email']) || empty($data['assunto']) || empty($data['mensagem'])) {
     http_response_code(400); // Requisição Inválida (Bad Request)
     echo json_encode(["erro" => "Preencha todos os campos obrigatórios."]);
     exit();
@@ -46,32 +46,27 @@ try {
      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
      // Prepara a query de inserção (Segurança contra SQL Injection)
-     $sql = "INSERT INTO pacientes (nome, cpf, idade, sexo, endereco, telefone, email, funcionario) 
-             VALUES (:nome, :cpf, :idade, :sexo, :endereco, :telefone, :email, :funcionario)";
+     $sql = "INSERT INTO mensagens (nome, email, assunto, mensagem) 
+             VALUES (:nome, :email, :assunto, :mensagem)";
              
      $stmt = $pdo->prepare($sql);
 
      // Executa a inserção, usando os dados decodificados do JSON
      $stmt->execute([
          'nome' => $data['nome'],
-         'cpf' => $data['cpf'],
-         'idade' => $data['idade'],
-         'sexo' => $data['sexo'],
-         'endereco' => $data['endereco'],
-         'telefone' => $data['telefone'],
          'email' => $data['email'],
-         // O campo 'funcionario' é um SELECT no React, seu valor padrão é 'Não'
-         'funcionario' => $data['funcionario'], 
+         'assunto' => $data['assunto'],
+         'mensagem' => $data['mensagem'],
      ]);
 
     // 6. Retorno de Sucesso (Resposta para o React)
     http_response_code(201); // Código 201: Created
-    echo json_encode(["sucesso" => "Consulta agendada com sucesso!", "id" => $pdo->lastInsertId()]);
+    echo json_encode(["sucesso" => "Mensagem enviada com sucesso!", "id" => $pdo->lastInsertId()]);
 
 } catch (\PDOException $e) {
     // 7. Retorno de Erro Interno do Servidor
     http_response_code(500);
-    echo json_encode(["erro" => "Erro interno do servidor ao agendar a consulta.", "detalhes" => $e->getMessage()]);
+    echo json_encode(["erro" => "Erro interno do servidor ao enviar a mensagem.", "detalhes" => $e->getMessage()]);
 }
 
 ?>

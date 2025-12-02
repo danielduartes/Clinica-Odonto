@@ -24,7 +24,7 @@ try {
 
 
 try {
-    $sql = "SELECT id, nome, cpf, telefone, email, funcionario, criado_em FROM pacientes ORDER BY id DESC"; 
+    $sql = "SELECT id, nome, cpf, idade, email, telefone, endereco, sexo, funcionario, criado_em FROM pacientes ORDER BY id DESC"; 
     
     $stmt = $pdo->query($sql);
     

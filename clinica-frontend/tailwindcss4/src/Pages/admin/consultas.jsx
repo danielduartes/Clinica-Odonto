@@ -80,13 +80,12 @@ function Consultas() {
           <div className='bg-cyan-500 px-10 py-3 border-b-2 border-gray-400'>
             <div className='flex justify-between m-3'>
               <nav className='flex items-center ml-20 text-lg'>
-                  {/* LINKS CORRIGIDOS, SEM CARACTERES ESPECIAIS */}
                 <Link to="/admin" className='mx-10 font-semibold text-white hover:text-cyan-900'>Admin</Link>
-                <Link to="/funcionarios" className='mx-10 font-semibold text-white hover:text-cyan-900'>Funcionários</Link>
-                <Link to="/pacientes" className='mx-10 font-semibold text-white hover:text-cyan-900'>Pacientes</Link>
-                <Link to="/consultas" className='mx-10 font-semibold text-white hover:text-cyan-900'>Consultas</Link>
-                <Link to="/marcarconsulta" className='mx-10 font-semibold text-white hover:text-cyan-900'>Marcar Consulta</Link>
-                <Link to="/cadastrarpaciente" className='mx-10 font-semibold text-white hover:text-cyan-900'>Cadastrar Paciente</Link>
+                <Link to="/admin/pacientes" className='mx-10 font-semibold text-white hover:text-cyan-900'>Pacientes</Link>
+                <Link to="/admin/consultas" className='mx-10 font-semibold text-white hover:text-cyan-900'>Consultas</Link>
+                <Link to="/admin/mensagens" className='mx-10 font-semibold text-white hover:text-cyan-900'>Mensagens</Link>
+                <Link to="/admin/marcarconsulta" className='mx-10 font-semibold text-white hover:text-cyan-900'>Marcar Consulta</Link>
+                <Link to="/admin/cadastrarpaciente" className='mx-10 font-semibold text-white hover:text-cyan-900'>Cadastrar Paciente</Link>
               </nav>
               <div className='mr-10'>
                 <p className='text-white text-xl font-sans font-medium'>Sorriso Raiz</p>
@@ -108,32 +107,44 @@ function Consultas() {
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Paciente</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">CPF</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Data</th>
+                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Dentista</th>
+                    <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Procedimento</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Hora</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Funcionário?</th>
                     <th className="py-3 px-6 text-left text-xs font-medium text-white uppercase tracking-wider">Ações</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {/* Mapeamento dos dados */}
-                  {consultas.map((consulta) => (
-                    <tr key={consulta.id} className="hover:bg-gray-50">
-                      <td className="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">{consulta.id}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.paciente}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.cpf}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.data}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.hora}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.funcionario}</td>
-                      <td className="py-4 px-6 whitespace-nowrap text-sm font-medium">
-                        <button
-                          onClick={() => handleExcluir(consulta.id, consulta.paciente)}
-                          className="text-red-600 hover:text-red-900 bg-red-100 hover:bg-red-200 p-2 rounded-lg font-semibold transition duration-150"
-                        >
-                          Excluir 🗑️
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+         {/* Mapeamento dos dados */}
+         {consultas.map((consulta) => (
+          <tr key={consulta.id} className="hover:bg-gray-50">
+           <td className="py-4 px-6 whitespace-nowrap text-sm font-medium text-gray-900">{consulta.id}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.paciente}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.cpf}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.data}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.dentista}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.procedimento}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.hora}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm text-gray-700">{consulta.funcionario}</td>
+           <td className="py-4 px-6 whitespace-nowrap text-sm font-medium flex space-x-2">
+            {/* NOVO: Botão Alterar usando Link para navegar para a tela de edição */}
+            <Link
+             to={`/admin/alterar-consultas/${consulta.id}`}
+             className="text-blue-600 hover:text-blue-900 bg-blue-100 hover:bg-blue-200 p-2 rounded-lg font-semibold transition duration-150"
+            >
+             Alterar ✏️
+            </Link>
+                        
+            <button
+             onClick={() => handleExcluir(consulta.id, consulta.paciente)}
+             className="text-red-600 hover:text-red-900 bg-red-100 hover:bg-red-200 p-2 rounded-lg font-semibold transition duration-150"
+            >
+             Excluir 🗑️
+            </button>
+           </td>
+          </tr>
+         ))}
+        </tbody>
               </table>
             </div>
           )}

@@ -6,8 +6,12 @@ function CadastrarPaciente() {
   const [formData, setFormData] = useState({
     nome: '',
     cpf: '',
+    idade: '',
+    sexo: '',
+    endereco: '',
     telefone: '',
-    email: ''
+    email: '',
+    funcionario: 'Não'
   });
 
   const navigate = useNavigate();
@@ -59,11 +63,11 @@ function CadastrarPaciente() {
             <div className='flex justify-between m-3'>
               <nav className='flex items-center ml-20 text-lg'>
                 <Link to="/admin" className='mx-10 font-semibold text-white hover:text-cyan-900'>Admin</Link>
-                <Link to="/funcionarios" className='mx-10 font-semibold text-white hover:text-cyan-900'>Funcionários</Link>
-                <Link to="/pacientes" className='mx-10 font-semibold text-white hover:text-cyan-900'>Pacientes</Link>
-                <Link to="/consultas" className='mx-10 font-semibold text-white hover:text-cyan-900'>Consultas</Link>
-                <Link to="/marcarconsulta" className='mx-10 font-semibold text-white hover:text-cyan-900'>Marcar Consulta</Link>
-                <Link to="/cadastrarpaciente" className='mx-10 font-semibold text-white hover:text-cyan-900'>Cadastrar Paciente</Link>
+                <Link to="/admin/pacientes" className='mx-10 font-semibold text-white hover:text-cyan-900'>Pacientes</Link>
+                <Link to="/admin/consultas" className='mx-10 font-semibold text-white hover:text-cyan-900'>Consultas</Link>
+                <Link to="/admin/mensagens" className='mx-10 font-semibold text-white hover:text-cyan-900'>Mensagens</Link>
+                <Link to="/admin/marcarconsulta" className='mx-10 font-semibold text-white hover:text-cyan-900'>Marcar Consulta</Link>
+                <Link to="/admin/cadastrarpaciente" className='mx-10 font-semibold text-white hover:text-cyan-900'>Cadastrar Paciente</Link>
               </nav>
               <div className='mr-10'>
                 <p className='text-white text-xl font-sans font-medium'>Sorriso Raiz</p>
@@ -72,7 +76,7 @@ function CadastrarPaciente() {
             </div>
           </div>
         </div>
-        <div className='bg-sky-700 w-130 h-140 ml-130 mt-30 rounded-xl shadow-2xl'>
+        <div className='bg-sky-700 w-130 h-195 ml-130 mt-30 rounded-xl shadow-2xl'>
           <form onSubmit={handleSubmit}>
             <div className='text-start pt-7 pl-7 font-semibold'>
               <p className='text-white'>Preencha o formulário para cadastrar o paciente</p>
@@ -82,6 +86,21 @@ function CadastrarPaciente() {
             </div>
             <div className='text-start'>
               <input required type="text" name="cpf" id="cpf" placeholder='CPF' value={formData.cpf} onChange={handleChange} className='bg-white mt-5 ml-15 w-70 h-9 rounded-lg px-3'/>
+            </div>
+            <div className='text-start'>
+              <input required type="number" name="idade" id="idade" placeholder='Idade' value={formData.idade} onChange={handleChange} className='bg-white mt-5 ml-15 w-21 h-9 rounded-lg px-3'/>
+            </div>
+            <div className='text-start mt-7'>
+              <p className='ml-15 text-white font-semibold'>Sexo</p>
+              <select required name="sexo" id="sexo" value={formData.sexo} onChange={handleChange} className='bg-white mt-5 ml-15 w-50 h-9 rounded-lg px-3'>
+              <option disabled value="">Selecione uma opção</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+            <div className='text-start'>
+              <input required type="text" name="endereco" id="endereco" placeholder='Endereço' value={formData.endereco} onChange={handleChange} className='bg-white mt-5 ml-15 w-70 h-9 rounded-lg px-3'/>
             </div>
             <div className='text-start'>
               <input required type="tel" name="telefone" id="telefone" placeholder='(xx) xxxxx-xxxx' value={formData.telefone} onChange={handleChange} className='bg-white mt-5 ml-15 w-40 h-9 rounded-lg px-3'/>

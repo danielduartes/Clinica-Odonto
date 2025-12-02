@@ -1,16 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Contato() {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    assunto: '',
+    mensagem: ''
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost/Clinica-Odonto/admin/mensagens-enviar.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      let resultado;
+      try {
+          resultado = await response.json();
+      } catch (e) {
+          resultado = { erro: 'Erro no servidor: Resposta não é um JSON válido.' };
+      }
+
+      if (response.ok) {
+        alert('Mensagem enviada com sucesso!');
+      } else {
+        alert(`Erro ao agendar: ${resultado.erro || 'Erro desconhecido'}`);
+        console.error(resultado);
+      }
+    } catch (error) {
+      console.error('Erro de rede:', error);
+      alert('Não foi possível conectar ao servidor.');
+    }
+  };
+
+
   return (
     <>
      {/* Header */}
       <div className='bg-white min-h-screen'>
         <div className='fixed top-0 left-0 w-full z-50 bg-cyan-900'>
           <div className='bg-cyan-800 px-10 py-3 border-b-2 border-gray-400'>
-            <div className='flex justify-between m-3'>
-              <nav className='flex items-center ml-20 text-lg'>
+            <div className='flex justify-between my-3 ml-2'>
+              <nav className='flex items-center text-lg'>
                 <Link to="/" className='mx-10 font-semibold text-white hover:text-cyan-300'>Home</Link>
                 <Link to="/sobrenos" className='mx-10 font-semibold text-white hover:text-cyan-300'>Sobre Nós</Link>
                 <Link to="/contato" className='mx-10 font-semibold text-white hover:text-cyan-300'>Contato</Link>
@@ -46,26 +94,26 @@ function Contato() {
               </div>
             </div>
           </div>
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className='mt-40 mr-70 '>
               <div className='bg-cyan-500 w-100 h-120 rounded-xl'>
                 <div className='flex items-start'>
                   <p className='text-white text-lg mt-8 ml-10 font-semibold'>Mande uma mensagem</p>
                 </div>
                 <div className='mt-5 mr-3'>
-                  <input required type="text" name="nome" id="nome" className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='Nome Completo'/>
+                  <input required type="text" name="nome" id="nome" value={formData.nome} onChange={handleChange} className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='Nome Completo'/>
                 </div>
                 <div className='mt-5 mr-3'>
-                  <input required type="email" name="email" id="email" className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='E-mail'/>
+                  <input required type="email" name="email" id="email" value={formData.email} onChange={handleChange} className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='E-mail'/>
                 </div>
                 <div className='mt-5 mr-3'>
-                  <input required type="text" name="assunto" id="assunto" className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='Assunto'/>
+                  <input required type="text" name="assunto" id="assunto" value={formData.assunto} onChange={handleChange} className='bg-white h-8 w-80 rounded-xl px-4 invalid:border-pink-500 focus:border-cyan-800 focus:outline-cyan-800' placeholder='Assunto'/>
                 </div>
                 <div>
                   <p className='text-white font-semibold text-start ml-9 mt-5'>Mensagem</p>
                 </div>
                 <div className='mt-2 mr-3'>
-                  <textarea required type="text" name="mensagem" id="mensagem" className='bg-white h-30 w-80 rounded-xl px-4 py-2 p text-start'/>
+                  <textarea required type="text" name="mensagem" id="mensagem" value={formData.mensagem} onChange={handleChange} className='bg-white h-30 w-80 rounded-xl px-4 py-2 p text-start'/>
                 </div>
                 <div>
                   <button type='submit' className='mt-7 mr-65 text-white bg-cyan-800 hover:bg-sky-600 p-2 px-3 rounded-lg font-semibold'>Enviar</button>
